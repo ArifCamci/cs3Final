@@ -4,10 +4,10 @@ OBJ = $(subst .java,.class,$(SRC))
 all: $(OBJ)
 
 %.class: %.java
-	javac $<
+	javac -classpath /mayflower:mayflower3.3.7.jar $<
 
 run: $(OBJ)
-	java Main
+	java -cp mayflower3.3.7.jar Main
 
 clean:
 	rm *.class
