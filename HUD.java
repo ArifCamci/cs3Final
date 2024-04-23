@@ -6,8 +6,8 @@ import mayflower.*;
 public class HUD extends Actor
 {
     // instance variables - replace the example below with your own
-    private int x;
-
+    private String selected;
+    
     
     public HUD()
     {
@@ -29,26 +29,32 @@ public class HUD extends Actor
                 /**
                  * this should call the function to select hospital
                  */
+                selected = "hospital";
                 
             }
             if(x > 18 && x < 82 && y > 79 && y < 134){
                 // select house
+                selected = "house";
                 
             }
             if(x > 18 && x < 82 && y > 155 && y < 210){
-                
+                selected = "market";
                 //select store
             }
             if(x > 18 && x < 82 && y > 235 && y < 350){
                 //select office
-                
+                selected = "office";
             }
             if(x > 18 && x < 82 && y > 370 && y < 426){
                 //select school
-                
+                selected = "school";
             }
         }
         
         
+    }
+    
+    public String getSelected(){
+        return selected;
     }
 }

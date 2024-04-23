@@ -9,4 +9,6 @@ public class BetaCityMap extends CityMap {
         }
         return new StaticCityBlock("images/office.png", 0, 120);
     }
+    
+    
 }
