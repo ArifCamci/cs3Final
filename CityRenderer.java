@@ -69,7 +69,7 @@ public class CityRenderer extends Actor
         return new CityCoordinate(rx / 100, ry / 100);
     }
 
-    public ScreenCoordinate CityToScreen(CityCoordinate coord) {
+    public ScreenCoordinate cityToScreen(CityCoordinate coord) {
         int rx, ry;
         rx = ry = 0;
         rx += coord.x;
@@ -87,7 +87,16 @@ public class CityRenderer extends Actor
       * @param iX The bottom left pixel on the image to place the image on
       * @param iY The bottom left pixel on the image to place the image on
      */
-    static void copyImage(MayflowerImage image, int mapX, int mapY, int iX, int iY) {
-        // TODO: Implement me
+    void copyImage(MayflowerImage image, int mapX, int mapY, int iX, int iY) {
+        // Location of the top left pixel of the map
+        int tly = mapY - iY;
+        int tlx = mapX - iX;
+        for (int i = Math.max(0, -tly); i < Math.min(image.getHeight(), buffer.getHeight()); i++) {
+            for (int j = Math.max(0, -tlx); j < Math.min(image.getWidth(), buffer.getWidth()); j++) {
+                int iy = tly + i;
+                int ix = tlx + j;
+                buffer.setColorAt(ix, iy, image.getColorAt(i, j));
+            }
+        }
     }
 }
