@@ -38,6 +38,7 @@ public class CityRenderer extends Actor
         buffer = new MayflowerImage(width, height);
         this.setImage(buffer);
         this.setLocation(xPosition, yPosition);
+        this.map = map;
     }
 
     public void act(){
@@ -52,6 +53,9 @@ public class CityRenderer extends Actor
 
                 ScreenCoordinate realScreenPos = cityToScreen(coord);
                 CityBlock block = map.getBlock(coord);
+                if (block == null) {
+                    continue;
+                }
                 MayflowerImage image = block.getImage();
                 copyImage(image, coord.x, coord.y, x, y);
             }
@@ -95,7 +99,7 @@ public class CityRenderer extends Actor
             for (int j = Math.max(0, -tlx); j < Math.min(image.getWidth(), buffer.getWidth()); j++) {
                 int iy = tly + i;
                 int ix = tlx + j;
-                buffer.setColorAt(ix, iy, image.getColorAt(i, j));
+                buffer.setColorAt(ix, iy, image.getColorAt(j, i));
             }
         }
     }
