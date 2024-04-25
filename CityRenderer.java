@@ -36,31 +36,33 @@ public class CityRenderer extends Actor
     public CityRenderer(CityMap map, int width, int height, int xPosition, int yPosition)
     {
         buffer = new MayflowerImage("images/grass.png");
+        
         this.setImage(buffer);
         this.setLocation(xPosition, yPosition);
         this.map = map;
+        
     }
 
     public void act(){
-        // HashSet<CityCoordinate> seenBlocks = new HashSet<>();
-        // for (int y = 0; y < buffer.getHeight(); y++) {
-            // for (int x = 0; x < buffer.getWidth(); x++) {
-                // CityCoordinate coord = screenToCity(new ScreenCoordinate(x, y));
-                // if (seenBlocks.contains(coord)) {
-                    // continue;
+            // HashSet<CityCoordinate> seenBlocks = new HashSet<>();
+            // for (int y = 0; y < buffer.getHeight(); y++) {
+                // for (int x = 0; x < buffer.getWidth(); x++) {
+                    // CityCoordinate coord = screenToCity(new ScreenCoordinate(x, y));
+                    // if (seenBlocks.contains(coord)) {
+                        // continue;
+                    // }
+                    // seenBlocks.add(coord);
+    
+                    // ScreenCoordinate realScreenPos = cityToScreen(coord);
+                    // CityBlock block = map.getBlock(coord);
+                    // if (block == null) {
+                        // continue;
+                    // }
+                    // MayflowerImage image = block.getImage();
+                    // copyImage(image, coord.x, coord.y, x, y);
                 // }
-                // seenBlocks.add(coord);
-
-                // ScreenCoordinate realScreenPos = cityToScreen(coord);
-                // CityBlock block = map.getBlock(coord);
-                // if (block == null) {
-                    // continue;
-                // }
-                // MayflowerImage image = block.getImage();
-                // copyImage(image, coord.x, coord.y, x, y);
             // }
-        // }
-        // this.setImage(buffer);
+            // this.setImage(buffer);
     }
 
     public CityCoordinate screenToCity(ScreenCoordinate coord) {
