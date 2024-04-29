@@ -6,7 +6,7 @@ import mayflower.*;
 public class HUD extends Actor
 {
     // instance variables - replace the example below with your own
-    private String selected;
+    private static String selected;
     
     
     public HUD()
