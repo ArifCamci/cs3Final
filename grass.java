@@ -9,7 +9,7 @@ public class grass extends CityBlock
      */
     public grass()
     {
-        p = new MayflowerImage("grass.png");
+        p = new MayflowerImage("images/grass.png");
         
         //setImage(p);
     }
@@ -30,5 +30,8 @@ public class grass extends CityBlock
         if(Mayflower.mouseClicked(this)){
             
         }
+    }
+    public String getImg(){
+        return "images/grass.png";
     }
 }

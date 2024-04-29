@@ -35,7 +35,7 @@ public class CityRenderer
     private World world;
     
     /** The actor stock to draw from */
-    private HashMap<MayflowerImage, ActorStock> actors;
+    private HashMap<String, ActorStock> actors;
     
     private class ActorStock {
         private ArrayList<Actor> stock;
@@ -60,6 +60,7 @@ public class CityRenderer
         }
         
         void placeActor(int x, int y) {
+            System.out.printf("Placing actor at %d %d\n", x, y);
             if (used < stock.size()) {
                 stock.get(used++).setLocation(x, y);
             }
@@ -75,6 +76,7 @@ public class CityRenderer
             for (int i = used; i < stock.size(); ++i) {
                 stock.get(i).setLocation(width, height);
             }
+            used = 0;
         }
     }
 
@@ -102,6 +104,8 @@ public class CityRenderer
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 CityCoordinate coord = screenToCity(new ScreenCoordinate(x, y));
+                System.out.println(coord.x);
+                System.out.println(coord.y);
                 if (seenBlocks.contains(coord)) {
                     continue;
                 }
@@ -113,30 +117,38 @@ public class CityRenderer
                 if (block == null) {
                     continue;
                 }
-                MayflowerImage image = block.getImage();
-                copyImage(image, coord.x, coord.y, x, y);
+                copyImage(block, realScreenPos.x, realScreenPos.y, x, y);
             }
+        }
+        for (ActorStock i: actors.values()) {
+            i.finishRender();
         }
     }
 
     public CityCoordinate screenToCity(ScreenCoordinate coord) {
+        /*
         int rx, ry;
         rx = ry = 0;
-        rx += coord.x;
-        ry -= coord.x;
-        rx += coord.y;
-        ry += coord.y;
-        return new CityCoordinate(rx / 100, ry / 100);
+        rx += coord.x / 100;
+        ry -= coord.x / 100;
+        rx += coord.y / 100;
+        ry += coord.y / 100;
+        return new CityCoordinate(rx, ry);
+        */
+        return new CityCoordinate(0, 0);
     }
 
     public ScreenCoordinate cityToScreen(CityCoordinate coord) {
+        /*
         int rx, ry;
         rx = ry = 0;
-        rx += coord.x;
-        ry += coord.x;
-        rx -= coord.y;
-        ry += coord.y;
-        return new ScreenCoordinate(rx * 100, ry * 100);
+        rx += coord.x * 100;
+        ry += coord.x * 100;
+        rx -= coord.y * 100;
+        ry += coord.y * 100;
+        return new ScreenCoordinate(rx, ry);
+        */
+        return new ScreenCoordinate(400, 300);
     }
 
     /** Copies an image to the buffer
@@ -147,13 +159,18 @@ public class CityRenderer
       * @param iX The bottom left pixel on the image to place the image on
       * @param iY The bottom left pixel on the image to place the image on
      */
-    void copyImage(MayflowerImage image, int mapX, int mapY, int iX, int iY) {
+    void copyImage(CityBlock block, int mapX, int mapY, int iX, int iY) {
+        MayflowerImage image = block.getImage();
+        String path = block.getImg();
+        if (path == null) {
+            return;
+        }
         if (!actors.containsKey(image)) {
-            actors.put(image, new ActorStock(world, image, width, height));
+            actors.put(path, new ActorStock(world, image, width, height));
         }
         // Location of the top left pixel of the map
         int tly = mapY - iY;
         int tlx = mapX - iX;
-        actors.get(image).placeActor(tlx, tly);
+        actors.get(path).placeActor(tlx, tly);
     }
 }
