@@ -31,4 +31,6 @@ public abstract class CityBlock {
      * k
      */
     public abstract void act();
+    
+    public abstract String getImg();
 }
