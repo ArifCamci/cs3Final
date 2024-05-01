@@ -58,7 +58,6 @@ public class CityRenderer
         }
         
         void placeActor(int x, int y) {
-            System.out.println(stock.size());
             if (used >= stock.size()) {
                 Actor newActor = new StaticActor(image);
                 world.addObject(newActor, x, y);
@@ -168,5 +167,34 @@ public class CityRenderer
             actors.put(path, new ActorStock(world, image, width, height));
         }
         actors.get(path).placeActor(x, y);
+    }
+    
+    /** get current x position
+       
+       @return the current y position
+       */
+    public int getX() {
+        return x;
+    }
+    /** get current y position
+       
+       @return the current y position
+       */
+    public int getY() {
+        return y;
+    }
+    /** set x position
+     * 
+     * @param xx the new x position
+     */
+    public void setX(int xx) {
+        x = xx;
+    }
+    /** set y position
+     * 
+     * @param yy the new y position
+     */
+    public void setY(int yy) {
+        y = yy;
     }
 }

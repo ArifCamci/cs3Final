@@ -11,15 +11,15 @@ public class money
     private int moneyGained;
     
     private int lastMoney;
-    private BetaCityMap map;
+    private CityMap map;
     /**
      * Constructor for objects of class money
      */
-    public money(int m, int g)
+    public money(int m, int g, CityMap mm)
     {
         currentMoney = m;
         moneyGained = g;
-        map = new BetaCityMap();
+        map = mm;
         lastMoney = g;
     }
     
@@ -38,7 +38,7 @@ public class money
         int place;
         int add = 0;
         for(CityCoordinate key : keys){
-            image.add(map.get(key).getImg());
+            image.add(map.getBlock(key).getImg());
         }
         
         for(String x : image){

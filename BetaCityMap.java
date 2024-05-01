@@ -17,7 +17,6 @@ public class BetaCityMap extends CityMap {
         cache.put("office",   new StaticCityBlock("images/office.png", 338, 271));
         cache.put("school",   new StaticCityBlock("images/school.png", 338, 271));
         cache.put("grass",    new StaticCityBlock("images/grass.png", 338, 271));
-        map.put(new CityCoordinate(1, 1), new StaticCityBlock("images/market.png", 0, 120));
     }
     
     public CityBlock getBlock(CityCoordinate c) {
@@ -40,10 +39,6 @@ public class BetaCityMap extends CityMap {
     
     public int size(){
         return map.size();
-    }
-    
-    public CityBlock get(CityCoordinate c){
-        return map.get(c);
     }
     
     public Set getCoordinates(){

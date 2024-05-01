@@ -29,31 +29,24 @@ public class HUD extends Actor
             y = m.getY();
             
             if(x > 17 && x < 82 && y > 14 && y < 58){
-                /**
-                 * this should call the function to select hospital
-                 */
+                // select hospital
                 selected = "hospital";
-                System.out.println("hospital selected");
             }
             if(x > 18 && x < 82 && y > 79 && y < 134){
                 // select house
                 selected = "house";
-                System.out.println("house selected");
             }
             if(x > 18 && x < 82 && y > 155 && y < 210){
-                selected = "market";
                 //select store
-                System.out.println("market selected");
+                selected = "market";
             }
             if(x > 18 && x < 82 && y > 235 && y < 350){
                 //select office
                 selected = "office";
-                System.out.println("office selected");
             }
             if(x > 18 && x < 82 && y > 370 && y < 426){
                 //select school
                 selected = "school";
-                System.out.println("school selected");
             }
             if (selected != null && x > 100) {
                 CityCoordinate cityCoordinate = renderer.screenToCity(new ScreenCoordinate(x, y));

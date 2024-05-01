@@ -1,3 +1,5 @@
+import java.util.Set;
+
 public abstract class CityMap {
     /**
      * Gets the building at some city block
@@ -21,4 +23,6 @@ public abstract class CityMap {
      * @param b The name of the building to place
      */
     public abstract void placeBuilding(CityCoordinate c, String b);
+    
+    public abstract Set<CityCoordinate> getCoordinates();
 }
