@@ -9,7 +9,6 @@ public class StaticCityBlock extends CityBlock {
     private int frameNumber;
     private int xOffset, yOffset;
     private String img;
-    private HUD hud = new HUD();
     public MayflowerImage getImage() {
         return images[frameNumber];
     }
@@ -57,20 +56,12 @@ public class StaticCityBlock extends CityBlock {
         xOffset = x;
         yOffset = y;
         frameNumber = 0;
+        img = imagePath;
     }
     
 
     public void act() {
-        frameNumber = (frameNumber+1) % images.length;
-        if(Mayflower.mouseClicked(this)){
-            this.setImage(hud.getSelected());
-        }
-        
-        
-    }
-    
-    public void setImage(String im){
-        images[0] = new MayflowerImage(im);
+        frameNumber = (frameNumber + 1) % images.length;
     }
     
     public String getImg(){

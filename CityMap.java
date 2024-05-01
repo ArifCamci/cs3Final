@@ -7,4 +7,18 @@ public abstract class CityMap {
      * @see CityBlock
      */
     public abstract CityBlock getBlock(CityCoordinate coord);
+    
+    /**
+     * Places a building down by block
+     * @param c The coordinate to place the building at
+     * @param b The block to place
+     */
+    public abstract void addBlock(CityCoordinate c, CityBlock b);
+    
+    /**
+     * Places a building down by name
+     * @param c The coordinate to place the building at
+     * @param b The name of the building to place
+     */
+    public abstract void placeBuilding(CityCoordinate c, String b);
 }

@@ -7,11 +7,14 @@ public class HUD extends Actor
 {
     // instance variables - replace the example below with your own
     private static String selected;
+    private CityRenderer renderer;
+    private CityMap map;
     
-    
-    public HUD()
+    public HUD(CityRenderer r, CityMap m)
     {
         MayflowerImage p = new MayflowerImage("images/HUD.png");
+        renderer = r;
+        map = m;
         
         setImage(p);
         
@@ -51,6 +54,11 @@ public class HUD extends Actor
                 //select school
                 selected = "school";
                 System.out.println("school selected");
+            }
+            if (selected != null && x > 100) {
+                CityCoordinate cityCoordinate = renderer.screenToCity(new ScreenCoordinate(x, y));
+                map.placeBuilding(cityCoordinate, selected);
+                selected = null;
             }
         }
         

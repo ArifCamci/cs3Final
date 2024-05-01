@@ -97,12 +97,12 @@ public class CityRenderer
 
     public void act(){
         HashSet<CityCoordinate> seenBlocks = new HashSet<>();
-        MouseInfo info = Mayflower.getMouseInfo();
-        CityCoordinate newCoord = screenToCity(new ScreenCoordinate(info.getX(), info.getY()));
-        ScreenCoordinate origCoord = cityToScreen(newCoord);
+        //MouseInfo info = Mayflower.getMouseInfo();
+        //CityCoordinate newCoord = screenToCity(new ScreenCoordinate(info.getX(), info.getY()));
+        //ScreenCoordinate origCoord = cityToScreen(newCoord);
         //System.out.printf("(%d %d) => (%d %d) => (%d %d)\n", info.getX(), info.getY(), newCoord.x, newCoord.y, origCoord.x, origCoord.y);
-        this.x = info.getX();
-        this.y = info.getY();
+        //this.x = info.getX();
+        //this.y = info.getY();
         
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {

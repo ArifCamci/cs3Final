@@ -5,24 +5,37 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class BetaCityMap extends CityMap {
-    private static HashMap<CityCoordinate, CityBlock> map = new HashMap<CityCoordinate, CityBlock>();
-    
-    StaticCityBlock cache;
+    private static HashMap<CityCoordinate, CityBlock> map;
+    private static HashMap<String, CityBlock> cache;
     
     public BetaCityMap(){
+        map = new HashMap<>();
+        cache = new HashMap<>();
+        cache.put("hospital", new StaticCityBlock("images/hospital.png", 338, 271));
+        cache.put("house",    new StaticCityBlock("images/house.png", 338, 271));
+        cache.put("market",   new StaticCityBlock("images/market.png", 338, 271));
+        cache.put("office",   new StaticCityBlock("images/office.png", 338, 271));
+        cache.put("school",   new StaticCityBlock("images/school.png", 338, 271));
+        cache.put("grass",    new StaticCityBlock("images/grass.png", 338, 271));
         map.put(new CityCoordinate(1, 1), new StaticCityBlock("images/market.png", 0, 120));
-        cache = new StaticCityBlock("images/grass.png", 338, 271);
     }
     
     public CityBlock getBlock(CityCoordinate c) {
-        if (c.x == 0 && c.y == 0) {
-            return null;
+        if (map.containsKey(c)) {
+            return map.get(c);
         }
-        return cache;
+        return cache.get("grass");
     }
     
     public void addBlock(CityCoordinate c, CityBlock b){
         map.put(c, b);
+    }
+    
+    public void placeBuilding(CityCoordinate c, String b) {
+        if (!cache.containsKey(b)) {
+            return;
+        }
+        addBlock(c, cache.get(b));
     }
     
     public int size(){
@@ -36,6 +49,5 @@ public class BetaCityMap extends CityMap {
     public Set getCoordinates(){
         return map.keySet();
     }
-    
     
 }
