@@ -8,14 +8,12 @@ import java.util.*;
 public class CityRenderer
 {
     /**
-     * The x coordinate in pixels of the top left of the screen, (0, 0) is the
-     * center of the building at (0, 0)
+     * The x coordinate in pixels of our view
      */
     private int x;
 
     /**
-     * The y coordinate in pixels of the top left of the screen, (0, 0) is the
-     * center of the building at (0, 0)
+     * The y coordinate in pixels of our view
      */
     private int y;
     
@@ -60,16 +58,14 @@ public class CityRenderer
         }
         
         void placeActor(int x, int y) {
-            System.out.printf("Placing actor at %d %d\n", x, y);
-            if (used < stock.size()) {
-                stock.get(used++).setLocation(x, y);
-            }
-            else {
+            System.out.println(stock.size());
+            if (used >= stock.size()) {
                 Actor newActor = new StaticActor(image);
                 world.addObject(newActor, x, y);
                 stock.add(newActor);
-                ++used;
             }
+            stock.get(used++).setLocation(x, y);
+            //stock.get(used++).setLocation(0, 0);
         }
         
         void finishRender() {
@@ -101,23 +97,28 @@ public class CityRenderer
 
     public void act(){
         HashSet<CityCoordinate> seenBlocks = new HashSet<>();
+        MouseInfo info = Mayflower.getMouseInfo();
+        CityCoordinate newCoord = screenToCity(new ScreenCoordinate(info.getX(), info.getY()));
+        ScreenCoordinate origCoord = cityToScreen(newCoord);
+        //System.out.printf("(%d %d) => (%d %d) => (%d %d)\n", info.getX(), info.getY(), newCoord.x, newCoord.y, origCoord.x, origCoord.y);
+        this.x = info.getX();
+        this.y = info.getY();
+        
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 CityCoordinate coord = screenToCity(new ScreenCoordinate(x, y));
-                System.out.println(coord.x);
-                System.out.println(coord.y);
                 if (seenBlocks.contains(coord)) {
                     continue;
                 }
                 seenBlocks.add(coord);
-                
+                //System.out.printf("Rendering city block at (%d %d)\n", coord.x, coord.y);
                 ScreenCoordinate realScreenPos = cityToScreen(coord);
                 CityBlock block = map.getBlock(coord);
                 
                 if (block == null) {
                     continue;
                 }
-                copyImage(block, realScreenPos.x, realScreenPos.y, x, y);
+                copyImage(block, realScreenPos.x - block.getXOffset(), realScreenPos.y - block.getYOffset());
             }
         }
         for (ActorStock i: actors.values()) {
@@ -126,29 +127,27 @@ public class CityRenderer
     }
 
     public CityCoordinate screenToCity(ScreenCoordinate coord) {
-        /*
-        int rx, ry;
+        double rx, ry;
+        int lx, ly;
         rx = ry = 0;
-        rx += coord.x / 100;
-        ry -= coord.x / 100;
-        rx += coord.y / 100;
-        ry += coord.y / 100;
-        return new CityCoordinate(rx, ry);
-        */
-        return new CityCoordinate(0, 0);
+        lx = coord.x - width/2 + this.x;
+        ly = coord.y - height/2 + this.y;
+        rx += lx / 522.0;
+        ry -= lx / 522.0;
+        rx -= ly / 278.0;
+        ry -= ly / 278.0;
+        return new CityCoordinate((int) Math.floor(rx), (int) Math.floor(ry));
     }
 
     public ScreenCoordinate cityToScreen(CityCoordinate coord) {
-        /*
         int rx, ry;
-        rx = ry = 0;
-        rx += coord.x * 100;
-        ry += coord.x * 100;
-        rx -= coord.y * 100;
-        ry += coord.y * 100;
-        return new ScreenCoordinate(rx, ry);
-        */
-        return new ScreenCoordinate(400, 300);
+        rx = width/2;
+        ry = height/2;
+        rx += coord.x * 261;
+        ry -= coord.x * 139;
+        rx -= coord.y * 261;
+        ry -= coord.y * 139;
+        return new ScreenCoordinate(rx - this.x, ry - 139 - this.y);
     }
 
     /** Copies an image to the buffer
@@ -159,18 +158,15 @@ public class CityRenderer
       * @param iX The bottom left pixel on the image to place the image on
       * @param iY The bottom left pixel on the image to place the image on
      */
-    void copyImage(CityBlock block, int mapX, int mapY, int iX, int iY) {
+    void copyImage(CityBlock block, int x, int y) {
         MayflowerImage image = block.getImage();
         String path = block.getImg();
         if (path == null) {
             return;
         }
-        if (!actors.containsKey(image)) {
+        if (!actors.containsKey(path)) {
             actors.put(path, new ActorStock(world, image, width, height));
         }
-        // Location of the top left pixel of the map
-        int tly = mapY - iY;
-        int tlx = mapX - iX;
-        actors.get(path).placeActor(tlx, tly);
+        actors.get(path).placeActor(x, y);
     }
 }

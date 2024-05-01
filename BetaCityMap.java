@@ -7,17 +7,18 @@ import java.util.Set;
 public class BetaCityMap extends CityMap {
     private static HashMap<CityCoordinate, CityBlock> map = new HashMap<CityCoordinate, CityBlock>();
     
-    
+    StaticCityBlock cache;
     
     public BetaCityMap(){
         map.put(new CityCoordinate(1, 1), new StaticCityBlock("images/market.png", 0, 120));
+        cache = new StaticCityBlock("images/grass.png", 338, 271);
     }
     
     public CityBlock getBlock(CityCoordinate c) {
-        if (c.x < 0 || c.x >= 2 || c.y < 0 || c.y >= 2) {
+        if (c.x == 0 && c.y == 0) {
             return null;
         }
-        return new StaticCityBlock("images/grass.png", 0, 120);
+        return cache;
     }
     
     public void addBlock(CityCoordinate c, CityBlock b){

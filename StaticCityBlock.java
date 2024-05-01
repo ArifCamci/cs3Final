@@ -33,6 +33,8 @@ public class StaticCityBlock extends CityBlock {
     public StaticCityBlock(String imagePath, int x, int y) {
         images = new MayflowerImage[1];
         images[0] = new MayflowerImage(imagePath);
+        xOffset = x;
+        yOffset = y;
         frameNumber = 0;
         img = imagePath;
     }
@@ -52,6 +54,8 @@ public class StaticCityBlock extends CityBlock {
         for (int i = 0; i < frameCount; i++) {
             images[i] = new MayflowerImage(String.format(imagePath, frameCount));
         }
+        xOffset = x;
+        yOffset = y;
         frameNumber = 0;
     }
     

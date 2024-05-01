@@ -6,4 +6,14 @@
 public abstract class Coordinate {
     int x;
     int y;
+    public int hashCode() {
+        return x * 301 + y;
+    }
+    public boolean equals(Object o) {
+        if (!(o instanceof Coordinate)) {
+            return false;
+        }
+        Coordinate other = (Coordinate) o;
+        return this.x == other.x && this.y == other.y;
+    }
 }
