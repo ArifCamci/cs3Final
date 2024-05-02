@@ -12,8 +12,8 @@ public class MyWorld extends World
         setBackground("images/background.png");
         map = new BetaCityMap();
         renderer = new CityRenderer(this, map, 800, 600, -100, 100);
-        hud = new HUD(renderer, map);
-        m = new money(0, 10, map);
+        m = new money(30, 10, map);
+        hud = new HUD(renderer, map, m);
         frameNumber = 0;
     }
     
@@ -36,9 +36,9 @@ public class MyWorld extends World
         if (frameNumber % 30 == 0) {
             int dm = m.CalcMoney();
             m.add(dm);
-            System.out.printf("Your current money is: %d\n", m.getMoney());
         }
         ++frameNumber;
+        this.showText(Integer.toString(m.getMoney()), 0, 585);
     }
     
     

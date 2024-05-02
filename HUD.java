@@ -1,4 +1,5 @@
 import mayflower.*;
+import java.util.HashMap;
 /**
  * extends actor, when clicked at positions of the icons the icon is selected
  * when clicked on a empty space it calls a function to place the object(not made yet)
@@ -9,12 +10,21 @@ public class HUD extends Actor
     private static String selected;
     private CityRenderer renderer;
     private CityMap map;
+    private money money;
+    private HashMap<String, Integer> costs;
     
-    public HUD(CityRenderer r, CityMap m)
+    public HUD(CityRenderer r, CityMap m, money mm)
     {
         MayflowerImage p = new MayflowerImage("images/HUD.png");
         renderer = r;
         map = m;
+        money = mm;
+        costs = new HashMap<>();
+        costs.put("hospital", 300);
+        costs.put("house",    30);
+        costs.put("market",   100);
+        costs.put("office",   150);
+        costs.put("school",   150);
         
         setImage(p);
         
@@ -50,8 +60,18 @@ public class HUD extends Actor
             }
             if (selected != null && x > 100) {
                 CityCoordinate cityCoordinate = renderer.screenToCity(new ScreenCoordinate(x, y));
-                map.placeBuilding(cityCoordinate, selected);
-                selected = null;
+                boolean canAfford = false;
+                if (costs.containsKey(selected)) {
+                    int cost = costs.get(selected);
+                    if (money.getMoney() >= cost) {
+                        money.subtract(cost);
+                        canAfford = true;
+                    }
+                }
+                if (canAfford) {
+                    map.placeBuilding(cityCoordinate, selected);
+                    //selected = null;
+                }
             }
         }
         
