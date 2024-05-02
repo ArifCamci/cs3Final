@@ -131,10 +131,10 @@ public class CityRenderer
         rx = ry = 0;
         lx = coord.x - width/2 + this.x;
         ly = coord.y - height/2 + this.y;
-        rx += lx / 522.0;
-        ry -= lx / 522.0;
-        rx -= ly / 278.0;
-        ry -= ly / 278.0;
+        rx += lx / 260.0;
+        ry -= lx / 260.0;
+        rx -= ly / 140.0;
+        ry -= ly / 140.0;
         return new CityCoordinate((int) Math.floor(rx), (int) Math.floor(ry));
     }
 
@@ -142,10 +142,10 @@ public class CityRenderer
         int rx, ry;
         rx = width/2;
         ry = height/2;
-        rx += coord.x * 261;
-        ry -= coord.x * 139;
-        rx -= coord.y * 261;
-        ry -= coord.y * 139;
+        rx += coord.x * 130;
+        ry -= coord.x * 70;
+        rx -= coord.y * 130;
+        ry -= coord.y * 70;
         return new ScreenCoordinate(rx - this.x, ry - 139 - this.y);
     }
 

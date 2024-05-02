@@ -11,12 +11,12 @@ public class BetaCityMap extends CityMap {
     public BetaCityMap(){
         map = new HashMap<>();
         cache = new HashMap<>();
-        cache.put("hospital", new StaticCityBlock("images/hospital.png", 338, 271));
-        cache.put("house",    new StaticCityBlock("images/house.png", 338, 271));
-        cache.put("market",   new StaticCityBlock("images/market.png", 338, 271));
-        cache.put("office",   new StaticCityBlock("images/office.png", 338, 271));
-        cache.put("school",   new StaticCityBlock("images/school.png", 338, 271));
-        cache.put("grass",    new StaticCityBlock("images/grass.png", 338, 271));
+        cache.put("hospital", new StaticCityBlock("images/hospital.png", 169, 65));
+        cache.put("house",    new StaticCityBlock("images/house.png",    169, 65));
+        cache.put("market",   new StaticCityBlock("images/market.png",   169, 65));
+        cache.put("office",   new StaticCityBlock("images/office.png",   169, 65));
+        cache.put("school",   new StaticCityBlock("images/school.png",   169, 65));
+        cache.put("grass",    new StaticCityBlock("images/grass.png",    169, 65));
     }
     
     public CityBlock getBlock(CityCoordinate c) {
