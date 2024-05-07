@@ -15,6 +15,7 @@ public class MyWorld extends World
         m = new money(30, 10, map);
         hud = new HUD(renderer, map, m);
         frameNumber = 0;
+        
     }
     
     public void act(){
@@ -39,6 +40,7 @@ public class MyWorld extends World
         }
         ++frameNumber;
         this.showText(Integer.toString(m.getMoney()), 0, 585);
+        this.showText(m.getDisclamer(), 20, 100, 50, Color.RED);
     }
     
     
