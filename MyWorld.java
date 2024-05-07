@@ -40,7 +40,7 @@ public class MyWorld extends World
         }
         ++frameNumber;
         this.showText(Integer.toString(m.getMoney()), 0, 585);
-        this.showText(m.getDisclamer(), 20, 100, 50, Color.RED);
+        this.showText(m.getDisclamer(), 25, 100, 30, Color.WHITE);
     }
     
     

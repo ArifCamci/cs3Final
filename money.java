@@ -34,7 +34,7 @@ public class money
         images.add("images/school.png");
         images.add("images/hospital.png");
         images.add("images/market.png");
-        disclamer = "";
+        disclamer = "not enough: \n";
         int place;
         int add = 0;
         for(CityCoordinate key : keys){
@@ -65,29 +65,38 @@ public class money
                 }
         }
         
+        
         while(things[0] >= 5){
-            if(things[1] < 1){
-                add -= 10;
-                disclamer += "not enough offices!";
-                things[1]--;
-            }
-            if(things[2] < 1){
-                add -= 10;
-                disclamer += " not enough schools!";
-                things[2]--;
-            }
-            if(things[3] < 1){
-                add -= 10;
-                disclamer += " not enough hospitals!";
-                things[3]--;
-            }
-            if(things[4] < 1){
-                add -= 10;
-                disclamer += " not enough markets!";
-                things[4]--;
-            }
             things[0] -= 5;
+            
+            
+            if(things[1] < 1){
+                add -= 15;
+                disclamer += "offices!\n";
+                
+            }
+            things[1] -= 1;
+            if(things[2] < 1){
+                add -= 15;
+                disclamer += " schools!\n";
+                
+            }
+            things[2] -= 1;
+            if(things[3] < 1){
+                add -= 15;
+                disclamer += " hospitals!\n";
+                
+            }
+            things[3] -=1;
+            if(things[4] < 1){
+                add -= 15;
+                disclamer += " markets!\n";
+                
+            }
+            things[4]-=1;
+           
         }
+       
         
         if(add > 0)
         moneyGained += add;
