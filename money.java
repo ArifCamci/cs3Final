@@ -12,6 +12,28 @@ public class money
     public static String disclamer = "";
     private int lastMoney;
     private CityMap map;
+    private ArrayList<Loan> loans;
+    /**
+     * loan class
+    */
+    private class Loan {
+        private int payment;
+        private int timeRemaining;
+        Loan(int p, int t) {
+            this.payment = p;
+            this.timeRemaining = t;
+        }
+        public int getPayment() {
+            return this.payment;
+        }
+        public int getTimeRemaining() {
+            return this.timeRemaining;
+        }
+        public void payOff() {
+            this.timeRemaining--;
+        }
+    }
+   
     /**
      * Constructor for objects of class money
      */
@@ -21,6 +43,7 @@ public class money
         moneyGained = g;
         map = mm;
         lastMoney = g;
+        loans = new ArrayList<>();
     }
     
     public int CalcMoney(){
@@ -39,6 +62,16 @@ public class money
         int add = 0;
         for(CityCoordinate key : keys){
             image.add(map.getBlock(key).getImg());
+        }
+        
+        // I don't want to write a custom hash function for loans to use a set
+        for (int i = loans.size()-1; i >= 0; i--) {
+            Loan loan = loans.get(i);
+            subtract(loan.getPayment());
+            loan.payOff();
+            if (loan.getTimeRemaining() <= 0) {
+                loans.remove(i);
+            }
         }
         
         for(String x : image){
@@ -118,5 +151,8 @@ public class money
     }
     public String getDisclamer(){return disclamer;}
     
-    
+    void addLoan(int amount, int payment, int term) {
+        this.add(amount);
+        this.loans.add(new Loan(payment, term));
+    }
 }

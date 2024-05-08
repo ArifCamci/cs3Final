@@ -38,7 +38,7 @@ public class HUD extends Actor
             x = m.getX();
             y = m.getY();
             
-            if(x > 17 && x < 82 && y > 14 && y < 58){
+            if(x > 18 && x < 82 && y > 14 && y < 58){
                 // select hospital
                 selected = "hospital";
             }
@@ -57,6 +57,9 @@ public class HUD extends Actor
             if(x > 18 && x < 82 && y > 370 && y < 426){
                 //select school
                 selected = "school";
+            }
+            if(x > 18 && x < 82 && y > 452 && y < 502){
+                money.addLoan(100, 10, 15);
             }
             if (selected != null && x > 100) {
                 CityCoordinate cityCoordinate = renderer.screenToCity(new ScreenCoordinate(x, y));
