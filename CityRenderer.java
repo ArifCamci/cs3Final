@@ -146,7 +146,7 @@ public class CityRenderer
         ry -= coord.x * 70;
         rx -= coord.y * 130;
         ry -= coord.y * 70;
-        return new ScreenCoordinate(rx - this.x, ry - 139 - this.y);
+        return new ScreenCoordinate(rx - this.x, ry - this.y);
     }
 
     /** Copies an image to the buffer
